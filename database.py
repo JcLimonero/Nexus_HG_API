@@ -9,7 +9,7 @@ _config.read(Path(__file__).parent / "config.ini")
 BASE_QUERY = """
 select
   o."Nr OS" as 'Orden de Reparacion',
-    LTRIM(a."Chassi") as 'Numero de Chasis',
+    LTRIM(RTRIM(a."Chassi")) as 'Numero de Chasis',
     v."Nm Modelo" as 'Modelo',
     v."Versao" as 'Version',
     a."Quilometragem" as 'Kilometraje',
@@ -43,7 +43,7 @@ Where o.Situacao ='R'
 
 BASE_TOP_QUERY = """
 select TOP {fetch_count} o."Nr OS" as 'Orden de Reparacion',
-  LTRIM(a."Chassi") as 'Numero de Chasis',
+  LTRIM(RTRIM(a."Chassi")) as 'Numero de Chasis',
   v."Nm Modelo" as 'Modelo',
   v."Versao" as 'Version',
   a."Quilometragem" as 'Kilometraje',
