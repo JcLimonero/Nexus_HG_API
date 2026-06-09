@@ -10,19 +10,19 @@ BASE_QUERY = """
 select
   o."Nr OS" as 'Orden de Reparacion',
     LTRIM(RTRIM(a."Chassi")) as 'Numero de Chasis',
-    v."Nm Modelo" as 'Modelo',
-    v."Versao" as 'Version',
+    LTRIM(RTRIM(v."Nm Modelo")) as 'Modelo',
+    LTRIM(RTRIM(v."Versao")) as 'Version',
     a."Quilometragem" as 'Kilometraje',
     o."Dt Fechamento" as 'Fecha Ultima Visita',
     a."Cliente Veiculo" as 'ND',
-    e."Razao Social" as 'Nombre del Cliente',
+    LTRIM(RTRIM(e."Razao Social")) as 'Nombre del Cliente',
     LTRIM(
         COALESCE(CAST(e."Nr DDD1" AS VARCHAR(20)), '') +
         COALESCE(CAST(e."Tel1" AS VARCHAR(20)), '')
     ) AS "Telefono",
-    e."email" as 'Correo Flujo Informacion',
+    LTRIM(RTRIM(e."email")) as 'Correo Flujo Informacion',
     SUBSTRING(CAST({{d '2000-01-01'}} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
-    ap."Comentario" as 'Operacion'
+    LTRIM(RTRIM(ap."Comentario")) as 'Operacion'
 From "OS" as o
 inner join "Atendimento" as a on o."Nr Atendimento"=a."Nr Atendimento"
 inner join "Veiculos" as v on a."Chassi"=v."Chassi"
@@ -44,19 +44,19 @@ Where o.Situacao ='R'
 BASE_TOP_QUERY = """
 select TOP {fetch_count} o."Nr OS" as 'Orden de Reparacion',
   LTRIM(RTRIM(a."Chassi")) as 'Numero de Chasis',
-  v."Nm Modelo" as 'Modelo',
-  v."Versao" as 'Version',
+  LTRIM(RTRIM(v."Nm Modelo")) as 'Modelo',
+  LTRIM(RTRIM(v."Versao")) as 'Version',
   a."Quilometragem" as 'Kilometraje',
   o."Dt Fechamento" as 'Fecha Ultima Visita',
   a."Cliente Veiculo" as 'ND',
-  e."Razao Social" as 'Nombre del Cliente',
+  LTRIM(RTRIM(e."Razao Social")) as 'Nombre del Cliente',
   LTRIM(
       COALESCE(CAST(e."Nr DDD1" AS VARCHAR(20)), '') +
       COALESCE(CAST(e."Tel1" AS VARCHAR(20)), '')
   ) AS "Telefono",
-  e."email" as 'Correo Flujo Informacion',
+  LTRIM(RTRIM(e."email")) as 'Correo Flujo Informacion',
   SUBSTRING(CAST({{d '2000-01-01'}} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
-  ap."Comentario" as 'Operacion'
+  LTRIM(RTRIM(ap."Comentario")) as 'Operacion'
 From "OS" as o
 inner join "Atendimento" as a on o."Nr Atendimento"=a."Nr Atendimento"
 inner join "Veiculos" as v on a."Chassi"=v."Chassi"
