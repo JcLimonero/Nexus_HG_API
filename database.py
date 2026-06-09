@@ -21,7 +21,7 @@ select
         COALESCE(CAST(e."Tel1" AS VARCHAR(20)), '')
     ) AS "Telefono",
     e."email" as 'Correo Flujo Informacion',
-    SUBSTRING(CAST({d '2000-01-01'} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
+    SUBSTRING(CAST({{d '2000-01-01'}} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
     ap."Comentario" as 'Operacion'
 From "OS" as o
 inner join "Atendimento" as a on o."Nr Atendimento"=a."Nr Atendimento"
@@ -55,7 +55,7 @@ select TOP {fetch_count} o."Nr OS" as 'Orden de Reparacion',
       COALESCE(CAST(e."Tel1" AS VARCHAR(20)), '')
   ) AS "Telefono",
   e."email" as 'Correo Flujo Informacion',
-  SUBSTRING(CAST({d '2000-01-01'} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
+  SUBSTRING(CAST({{d '2000-01-01'}} + (v."Dt Venda" - 730119) AS CHAR(10)), 1, 10) AS "Dt Venda",
   ap."Comentario" as 'Operacion'
 From "OS" as o
 inner join "Atendimento" as a on o."Nr Atendimento"=a."Nr Atendimento"
